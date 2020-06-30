@@ -27,9 +27,10 @@ class NewtonInterpolation(Interpolation):
             self.begin -= 1
         res = None
         t = (x_ - x[self.begin]) / h
-        if self.begin <= x[self.n // 2]:
+        # print(x[self.begin])
+        if self.begin <= self.n // 2:
             res = self.forwards(t)
-        elif x[self.n // 2] <= x_ <= x[-1]:
+        elif self.begin >= self.n // 2:
             res = self.backwards(t)
         return res
 
@@ -58,7 +59,8 @@ class NewtonInterpolation(Interpolation):
         ti = t
         for i in range(1, self.begin):
             ti *= t + i
-            res += ti / self.__factorial(i + 1) * self.delta(i + 1, self.begin - i - 1)
+            d = self.delta(i + 1, self.begin - i - 1)
+            res += ti / self.__factorial(i + 1) * d
         return res
 
     def delta(self, q, p=None):

@@ -20,10 +20,9 @@ class UneqSpacedNewtonInterpolation(Interpolation):
                 break
             elif self.x[0] < x < self.x[1] or x > self.x[i] and n - i >= 3:
                 for j in range(2):
-                    print(i + j)
-                    self.dif_x = [self.x[i + j], self.x[i + j + 1], self.x[i + j + 2]]
-                    self.dif_y = [self.y[self.x[i + j]], self.y[self.x[i + j + 1]],
-                                  self.y[self.x[i + j + 2]]]
+                    self.dif_x = [self.x[i + j - 1], self.x[i + j], self.x[i + j + 1]]
+                    self.dif_y = [self.y[self.x[i + j - 1]], self.y[self.x[i + j]],
+                                  self.y[self.x[i + j + 1]]]
                     res += self.calculate(x)
                 break
         return res / 2
